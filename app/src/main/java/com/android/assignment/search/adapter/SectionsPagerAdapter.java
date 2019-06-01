@@ -10,11 +10,14 @@ import java.util.List;
 
 public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
-    private final List<Fragment> mFragmentList = new ArrayList<>();
-    private final List<String> mFragmentTitleList = new ArrayList<>();
+    private final List<String> mFragmentTitleList;
+    private final List<Fragment> mFragmentList;
 
     public SectionsPagerAdapter(FragmentManager fm) {
         super(fm);
+        mFragmentList = new ArrayList<>();
+        mFragmentTitleList= new ArrayList<>();
+
 
     }
     @Override

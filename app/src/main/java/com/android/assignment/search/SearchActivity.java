@@ -66,10 +66,8 @@ public class SearchActivity extends BaseActivity {
     }
 
     private void setDetailFragment(ModelForSearchList.ItemsBean itemdata, ViewPager viewPager) {
-
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mSectionsPagerAdapter.addFrag(SearchDetailFragment.newInstance(itemdata), "Detail");
-        viewPager.setAdapter(mSectionsPagerAdapter);
+        mSectionsPagerAdapter.notifyDataSetChanged();
     }
 
     private void setupSearchView(final ViewPager viewPager) {
