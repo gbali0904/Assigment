@@ -56,6 +56,8 @@ public class MainActivity extends BaseActivity implements MainView {
         project_type = edProjectType.getText().toString();
         project_language = edProjectLanguage.getText().toString();
         mPresenter.checkInputData(project_type,project_language);
+        hideKeyboard();
+
     }
 
     @Override

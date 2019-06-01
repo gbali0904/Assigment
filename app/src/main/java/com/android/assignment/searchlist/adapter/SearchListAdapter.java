@@ -115,7 +115,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         }
     }
 
-    public static void setOnItemClickListener(ClickListener clickListener) {
+    public  void setOnItemClickListener(ClickListener clickListener) {
         clickListener_new = clickListener;
     }
 

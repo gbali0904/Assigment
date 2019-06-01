@@ -47,11 +47,14 @@ public class SearchDetailFragment extends BaseFragment {
 
     @Override
     protected void setUp(View view) {
-        detailData.setText( Html.fromHtml("id:"+item_data.getId()+
-                "<br> Node Id:"+item_data.getNode_id()+"</br>"+
-                "<br> name:"+item_data.getName()+"</br>"+
-                "<br> full_name:"+item_data.getFull_name()+"</br>"+
-                "<br> private:"+item_data.isPrivateX()+"</br>"
+        loadNewData(item_data);
+    }
+    public void loadNewData(ModelForSearchList.ItemsBean itemdata) {
+        detailData.setText( Html.fromHtml("id:"+itemdata.getId()+
+                "<br> Node Id:"+itemdata.getNode_id()+"</br>"+
+                "<br> name:"+itemdata.getName()+"</br>"+
+                "<br> full_name:"+itemdata.getFull_name()+"</br>"+
+                "<br> private:"+itemdata.isPrivateX()+"</br>"
         ));
     }
 }

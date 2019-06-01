@@ -124,4 +124,8 @@ public class SearchListFragment extends BaseFragment implements SearchListView {
         super.onDestroyView();
     }
 
+    public void loadNewData(String projectType, String projectLanguage) {
+        page = 1; // reset page to 1
+        mPresenter.getSearchList(projectType, projectLanguage, page);
+    }
 }
