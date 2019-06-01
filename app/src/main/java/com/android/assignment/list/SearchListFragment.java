@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import com.android.assignment.R;
 import com.android.assignment.base.BaseFragment;
@@ -25,35 +24,30 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 
 public class SearchListFragment extends BaseFragment implements SearchListView {
+
     @Inject
     SearchListPresenter<SearchListView> mPresenter;
-
-
     @Inject
     SearchListAdapter adapter;
-
     @Inject
     LinearLayoutManager mLayoutManager;
-
-
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    @BindView(R.id.edProjectType)
-    EditText edProjectType;
-    @BindView(R.id.edProjectLanguage)
-    EditText edProjectLanguage;
-    Unbinder unbinder;
 
     private boolean isLoading = false;
-    private Bundle bundle;
-    private String language;
-    private String type;
+    private static  String language;
+    private static String type;
     private int page = 1;
     private List<ModelForSearchList.ItemsBean> items;
+
+    public static SearchListFragment newInstance(String project_type, String project_language) {
+        type=project_type;
+        language=project_language;
+        return new SearchListFragment();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,9 +59,6 @@ public class SearchListFragment extends BaseFragment implements SearchListView {
             component.inject(this);
             setUnBinder(ButterKnife.bind(this, view));
             mPresenter.onAttach(this);
-            bundle = this.getArguments();
-            type = bundle.getString(Constants.TYPE);
-            language = bundle.getString(Constants.LANGUAGE);
             mPresenter.getSearchList(type, language, page);
         }
 
@@ -112,7 +103,7 @@ public class SearchListFragment extends BaseFragment implements SearchListView {
                 super.onScrolled(recyclerView, dx, dy);
                 LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 if (!isLoading) {
-                    if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == items.size() - 1 && page != 101) {
+                    if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == items.size() - 1 && page <= 100) {
                         loadMore();
                         isLoading = true;
                     }

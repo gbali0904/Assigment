@@ -3,6 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <EditText
+        android:id="@+id/edProjectType"
+        android:layout_width="match_parent"
+        style="@style/edStyle"
+        android:hint="@string/type"
+        android:background="@drawable/border"
+        android:textColor="@color/colorPrimaryDark"
+        android:textColorHint="@color/colorPrimary"
+        />
+    <EditText
+        android:id="@+id/edProjectLanguage"
+        android:layout_width="match_parent"
+        style="@style/edStyle"
+        android:background="@drawable/border"
+        android:layout_marginTop="10dp"
+        android:hint="@string/language"
+        android:textColor="@color/colorPrimaryDark"
+        android:textColorHint="@color/colorPrimary"
+        />
+
     <android.support.v4.view.ViewPager
         android:id="@+id/main_tabPager"
         android:layout_width="match_parent"

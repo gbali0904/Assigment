@@ -21,9 +21,12 @@ import butterknife.ButterKnife;
 
 public class SearchListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
+    private static ClickListener clickListener_new;
     private final int VIEW_TYPE_ITEM = 0;
     private final int VIEW_TYPE_LOADING = 1;
     private List<ModelForSearchList.ItemsBean> modelForSearchList;
+
+
     public void setList(List<ModelForSearchList.ItemsBean> modelForSearchList) {
         this.modelForSearchList = modelForSearchList;
         notifyDataSetChanged();
@@ -82,8 +85,16 @@ public class SearchListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
         }
 
-        public void bind(ModelForSearchList.ItemsBean itemsBean) {
+        public void bind(final ModelForSearchList.ItemsBean itemsBean) {
             repo_name.setText(itemsBean.getName());
+
+            lay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    clickListener_new.onItemClick(itemsBean);
+                }
+            });
+
         }
     }
 
@@ -102,5 +113,13 @@ public class SearchListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
         public void bind() {
         }
+    }
+
+    public static void setOnItemClickListener(ClickListener clickListener) {
+        clickListener_new = clickListener;
+    }
+
+    public interface ClickListener {
+        void onItemClick(ModelForSearchList.ItemsBean id);
     }
 }
