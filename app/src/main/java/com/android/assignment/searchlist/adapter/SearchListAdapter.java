@@ -21,10 +21,10 @@ import butterknife.ButterKnife;
 
 public class SearchListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
+    private static ClickListener clickListener_new;
     private final int VIEW_TYPE_ITEM = 0;
     private final int VIEW_TYPE_LOADING = 1;
     private List<ModelForSearchList.ItemsBean> modelForSearchList;
-    private Callback mCallback;
 
 
     public void setList(List<ModelForSearchList.ItemsBean> modelForSearchList) {
@@ -70,13 +70,6 @@ public class SearchListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         return modelForSearchList.get(position) == null ? VIEW_TYPE_LOADING : VIEW_TYPE_ITEM;
     }
 
-    public void setCallback(Callback callback) {
-        mCallback = callback;
-    }
-    public interface Callback {
-        void onSetOnDetail(ModelForSearchList.ItemsBean itemsBean);
-    }
-
     public class SearchListViewHolder extends BaseViewHolder {
         @BindView(R.id.txt_repo_name)
         TextView repo_name;
@@ -98,8 +91,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             lay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (mCallback != null)
-                        mCallback.onSetOnDetail(itemsBean);
+                    clickListener_new.onItemClick(itemsBean);
                 }
             });
 
@@ -123,5 +115,11 @@ public class SearchListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         }
     }
 
+    public static void setOnItemClickListener(ClickListener clickListener) {
+        clickListener_new = clickListener;
+    }
 
+    public interface ClickListener {
+        void onItemClick(ModelForSearchList.ItemsBean id);
+    }
 }

@@ -25,7 +25,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SearchActivity extends BaseActivity implements SearchView , SearchListAdapter.Callback{
+public class SearchActivity extends BaseActivity implements SearchView {
     @BindView(R.id.main_tabPager)
     ViewPager mViewPager;
     @BindView(R.id.edProjectType)
@@ -37,8 +37,6 @@ public class SearchActivity extends BaseActivity implements SearchView , SearchL
     private Handler mHandler = new Handler(Looper.getMainLooper());
     ModelForSearchList.ItemsBean itemdata=new ModelForSearchList.ItemsBean();
 
-    @Inject
-    SearchListAdapter searchListAdapter;
 
     @Inject
     SearchMVPPersenter<SearchView> mPresenter;
@@ -67,8 +65,12 @@ public class SearchActivity extends BaseActivity implements SearchView , SearchL
 
         setupViewPager();
         setupSearchView();
-
-        searchListAdapter.setCallback(this);
+        SearchListAdapter.setOnItemClickListener(new SearchListAdapter.ClickListener() {
+            @Override
+            public void onItemClick(ModelForSearchList.ItemsBean itemdata) {
+                setDetailFragment(itemdata);
+            }
+        });
 
     }
 
@@ -106,6 +108,7 @@ public class SearchActivity extends BaseActivity implements SearchView , SearchL
 
     private void setupViewPager()
     {
+
         mSectionsPagerAdapter.addFrag(SearchListFragment.newInstance(project_type,project_language), "List");
         mViewPager.setAdapter(mSectionsPagerAdapter);
     }
@@ -122,8 +125,5 @@ public class SearchActivity extends BaseActivity implements SearchView , SearchL
     }
 
 
-    @Override
-    public void onSetOnDetail(ModelForSearchList.ItemsBean itemsBean) {
-        setDetailFragment(itemdata);
-    }
+
 }
