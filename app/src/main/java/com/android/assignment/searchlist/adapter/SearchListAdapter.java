@@ -1,7 +1,9 @@
 package com.android.assignment.searchlist.adapter;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import com.android.assignment.R;
 import com.android.assignment.base.BaseViewHolder;
 import com.android.assignment.searchlist.model.ModelForSearchList;
+import com.android.assignment.utility.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +28,10 @@ public class SearchListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private final int VIEW_TYPE_ITEM = 0;
     private final int VIEW_TYPE_LOADING = 1;
     private List<ModelForSearchList.ItemsBean> modelForSearchList;
+    private int row_index;
+    private int oldRow;
+    private boolean click=false;
+    private static HideclickListener hide_new;
 
 
     public void setList(List<ModelForSearchList.ItemsBean> modelForSearchList) {
@@ -54,7 +61,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     public void onBindViewHolder(@NonNull BaseViewHolder basicviewHolder, int i) {
 
         if (basicviewHolder instanceof SearchListViewHolder) {
-            ((SearchListViewHolder) basicviewHolder).bind(modelForSearchList.get(i));
+            ((SearchListViewHolder) basicviewHolder).bind(i);
         } else if (basicviewHolder instanceof LoadingViewHolder) {
             ((LoadingViewHolder) basicviewHolder).bind();
         }
@@ -85,16 +92,32 @@ public class SearchListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
         }
 
-        public void bind(final ModelForSearchList.ItemsBean itemsBean) {
+        public void bind(final int position) {
+            final ModelForSearchList.ItemsBean itemsBean = modelForSearchList.get(position);
             repo_name.setText(itemsBean.getName());
-
             lay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    clickListener_new.onItemClick(itemsBean);
+                  //  clickListener_new.onItemClick(itemsBean);
+                    row_index=position;
+
+                    if (row_index==position && click == false)
+                    {
+
+                        Log.e("this","Here we come for show");
+                        clickListener_new.onItemClick(itemsBean);
+                        click=true;
+                    }
+
+                    else if(row_index==position && click == true)
+                    {
+                        Log.e("this","Here we come for hide");
+                        hide_new.onHide();
+                        click=false;
+                    }
+
                 }
             });
-
         }
     }
 
@@ -121,5 +144,12 @@ public class SearchListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     public interface ClickListener {
         void onItemClick(ModelForSearchList.ItemsBean id);
+    }
+    public  void setOnHideItemClickListener(HideclickListener clickListener) {
+        hide_new = clickListener;
+    }
+
+    public interface HideclickListener {
+        void onHide();
     }
 }
