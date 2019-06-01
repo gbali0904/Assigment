@@ -89,6 +89,7 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
         mFragmentList.remove(searchDetailFragment);
         mFragmentTitleList.remove(TITLE_SEARCH_DETAILS);
         searchDetailFragment = null;
+        notifyDataSetChanged();
     }
 
 }

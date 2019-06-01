@@ -26,7 +26,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SearchActivity extends BaseActivity implements SearchView, SearchListAdapter.ClickListener, SearchListAdapter.HideclickListener {
+public class SearchActivity extends BaseActivity implements SearchView, SearchListAdapter.ClickListener {
     @BindView(R.id.main_tabPager)
     ViewPager mViewPager;
     @BindView(R.id.edProjectType)
@@ -68,7 +68,6 @@ public class SearchActivity extends BaseActivity implements SearchView, SearchLi
         setupViewPager();
         setupSearchView();
         searchListAdapter.setOnItemClickListener(this);
-        searchListAdapter.setOnHideItemClickListener(this);
         tabLayout.setupWithViewPager(mViewPager);
     }
 
