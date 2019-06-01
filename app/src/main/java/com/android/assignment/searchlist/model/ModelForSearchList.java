@@ -1,4 +1,4 @@
-package com.android.assignment.list.model;
+package com.android.assignment.searchlist.model;
 
 import com.google.gson.annotations.SerializedName;
 

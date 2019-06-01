@@ -1,4 +1,4 @@
-package com.android.assignment.list.adapter;
+package com.android.assignment.searchlist.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.android.assignment.R;
 import com.android.assignment.base.BaseViewHolder;
-import com.android.assignment.list.model.ModelForSearchList;
+import com.android.assignment.searchlist.model.ModelForSearchList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +21,10 @@ import butterknife.ButterKnife;
 
 public class SearchListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
-    private static ClickListener clickListener_new;
     private final int VIEW_TYPE_ITEM = 0;
     private final int VIEW_TYPE_LOADING = 1;
     private List<ModelForSearchList.ItemsBean> modelForSearchList;
+    private Callback mCallback;
 
 
     public void setList(List<ModelForSearchList.ItemsBean> modelForSearchList) {
@@ -70,6 +70,13 @@ public class SearchListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         return modelForSearchList.get(position) == null ? VIEW_TYPE_LOADING : VIEW_TYPE_ITEM;
     }
 
+    public void setCallback(Callback callback) {
+        mCallback = callback;
+    }
+    public interface Callback {
+        void onSetOnDetail(ModelForSearchList.ItemsBean itemsBean);
+    }
+
     public class SearchListViewHolder extends BaseViewHolder {
         @BindView(R.id.txt_repo_name)
         TextView repo_name;
@@ -91,7 +98,8 @@ public class SearchListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             lay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    clickListener_new.onItemClick(itemsBean);
+                    if (mCallback != null)
+                        mCallback.onSetOnDetail(itemsBean);
                 }
             });
 
@@ -115,11 +123,5 @@ public class SearchListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         }
     }
 
-    public static void setOnItemClickListener(ClickListener clickListener) {
-        clickListener_new = clickListener;
-    }
 
-    public interface ClickListener {
-        void onItemClick(ModelForSearchList.ItemsBean id);
-    }
 }

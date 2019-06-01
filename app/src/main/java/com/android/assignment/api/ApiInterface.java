@@ -1,6 +1,6 @@
 package com.android.assignment.api;
 
-import com.android.assignment.list.model.ModelForSearchList;
+import com.android.assignment.searchlist.model.ModelForSearchList;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;

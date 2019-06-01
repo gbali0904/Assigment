@@ -7,7 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 
 import com.android.assignment.R;
 
-public final class ProgressBar {
+public  class ProgressBar {
     public static ProgressDialog showLoadingDialog(Context context) {
         ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.show();

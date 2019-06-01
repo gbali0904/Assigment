@@ -1,9 +1,9 @@
-package com.android.assignment.list.persenter;
+package com.android.assignment.searchlist.persenter;
 
 import com.android.assignment.api.RetrofitImp;
 import com.android.assignment.base.BasePresenter;
-import com.android.assignment.list.model.ModelForSearchList;
-import com.android.assignment.list.view.SearchListView;
+import com.android.assignment.searchlist.model.ModelForSearchList;
+import com.android.assignment.searchlist.view.SearchListView;
 
 import javax.inject.Inject;
 
@@ -51,8 +51,10 @@ public class SearchListMvpPresenter<V extends SearchListView> extends BasePresen
                         if (!isViewAttached()) {
                             return;
                         }
+                        if (modelForSearchList != null && modelForSearchList.getItems() != null) {
+                            getMvpView().getSearchListSuccess(modelForSearchList.getItems());
+                        }
                         getMvpView().hideLoading();
-                        getMvpView().getSearchListSuccess(modelForSearchList);
                     }
                 });
     }
@@ -75,7 +77,6 @@ public class SearchListMvpPresenter<V extends SearchListView> extends BasePresen
                         if (!isViewAttached()) {
                             return;
                         }
-                        getMvpView().hideLoading();
                         handleApiError(e);
                         e.printStackTrace();
                     }
@@ -84,8 +85,11 @@ public class SearchListMvpPresenter<V extends SearchListView> extends BasePresen
                         if (!isViewAttached()) {
                             return;
                         }
-                        getMvpView().hideLoading();
-                        getMvpView().getLoadSearchListSuccess(modelForSearchList);
+
+                        if (modelForSearchList != null && modelForSearchList.getItems() != null) {
+                            getMvpView().getLoadSearchListSuccess(modelForSearchList.getItems());
+                        }
+
                     }
                 });
     }

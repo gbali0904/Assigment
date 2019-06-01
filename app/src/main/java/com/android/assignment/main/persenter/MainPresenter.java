@@ -6,5 +6,7 @@ import com.android.assignment.main.view.MainView;
 
 @PerActivity
 public interface MainPresenter<V extends MainView> extends MvpPresenter<V> {
-    void onAttach(V mvpView);
+
+    void checkInputData(String project_type, String project_language);
+
 }

@@ -7,13 +7,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import com.android.assignment.api.RetrofitImp;
 import com.android.assignment.di.ActivityContext;
 import com.android.assignment.di.PerActivity;
-import com.android.assignment.list.adapter.SearchListAdapter;
-import com.android.assignment.list.persenter.SearchListMvpPresenter;
-import com.android.assignment.list.persenter.SearchListPresenter;
-import com.android.assignment.list.view.SearchListView;
+import com.android.assignment.search.adapter.SectionsPagerAdapter;
+import com.android.assignment.searchlist.adapter.SearchListAdapter;
+import com.android.assignment.searchlist.persenter.SearchListMvpPresenter;
+import com.android.assignment.searchlist.persenter.SearchListPresenter;
+import com.android.assignment.searchlist.view.SearchListView;
 import com.android.assignment.main.persenter.MainMvpPresenter;
 import com.android.assignment.main.persenter.MainPresenter;
 import com.android.assignment.main.view.MainView;
+import com.android.assignment.search.persenter.SearchMVPPersenter;
+import com.android.assignment.search.persenter.SearchPersenter;
+import com.android.assignment.search.view.SearchView;
 
 import dagger.Module;
 import dagger.Provides;
@@ -55,6 +59,17 @@ public class ActivityModule {
     SearchListPresenter<SearchListView> provideSearchListPresenter(
             SearchListMvpPresenter<SearchListView> presenter) {
         return presenter;
+    }
+    @Provides
+    @PerActivity
+    SearchPersenter<SearchView> provideSearchPresenter(
+            SearchMVPPersenter<SearchView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    SectionsPagerAdapter provideFeedPagerAdapter(AppCompatActivity activity) {
+        return new SectionsPagerAdapter(activity.getSupportFragmentManager());
     }
 
     @Provides

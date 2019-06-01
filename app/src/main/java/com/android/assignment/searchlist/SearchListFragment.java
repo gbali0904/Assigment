@@ -1,4 +1,4 @@
-package com.android.assignment.list;
+package com.android.assignment.searchlist;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,11 +12,10 @@ import android.view.ViewGroup;
 import com.android.assignment.R;
 import com.android.assignment.base.BaseFragment;
 import com.android.assignment.di.component.ActivityComponent;
-import com.android.assignment.list.adapter.SearchListAdapter;
-import com.android.assignment.list.model.ModelForSearchList;
-import com.android.assignment.list.persenter.SearchListPresenter;
-import com.android.assignment.list.view.SearchListView;
-import com.android.assignment.utility.Constants;
+import com.android.assignment.searchlist.adapter.SearchListAdapter;
+import com.android.assignment.searchlist.model.ModelForSearchList;
+import com.android.assignment.searchlist.persenter.SearchListPresenter;
+import com.android.assignment.searchlist.view.SearchListView;
 
 import java.util.List;
 
@@ -75,17 +74,17 @@ public class SearchListFragment extends BaseFragment implements SearchListView {
     }
 
     @Override
-    public void getSearchListSuccess(ModelForSearchList modelForSearchList) {
-        items = modelForSearchList.getItems();
+    public void getSearchListSuccess(List<ModelForSearchList.ItemsBean> modelForSearchList) {
+        items = modelForSearchList;
         adapter.setList(items);
     }
 
     @Override
-    public void getLoadSearchListSuccess(ModelForSearchList modelForSearchList) {
+    public void getLoadSearchListSuccess(List<ModelForSearchList.ItemsBean> modelForSearchList) {
         items.remove(items.size() - 1);
         int scrollPosition = items.size();
         adapter.notifyItemRemoved(scrollPosition);
-        items.addAll(modelForSearchList.getItems());
+        items.addAll(modelForSearchList);
         adapter.notifyDataSetChanged();
         isLoading = false;
     }
@@ -117,6 +116,12 @@ public class SearchListFragment extends BaseFragment implements SearchListView {
         adapter.notifyItemInserted(items.size() - 1);
         page = page + 1;
         mPresenter.getLoadSearchList(type, language, page);
+    }
+
+    @Override
+    public void onDestroyView() {
+        mPresenter.onDetach();
+        super.onDestroyView();
     }
 
 }

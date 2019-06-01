@@ -1,7 +1,6 @@
-package com.android.assignment.detail;
+package com.android.assignment.searchdetail;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,7 @@ import android.widget.TextView;
 
 import com.android.assignment.R;
 import com.android.assignment.base.BaseFragment;
-import com.android.assignment.list.model.ModelForSearchList;
+import com.android.assignment.searchlist.model.ModelForSearchList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

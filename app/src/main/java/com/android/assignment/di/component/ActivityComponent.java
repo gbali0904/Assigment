@@ -2,7 +2,7 @@ package com.android.assignment.di.component;
 
 import com.android.assignment.di.PerActivity;
 import com.android.assignment.di.module.ActivityModule;
-import com.android.assignment.list.SearchListFragment;
+import com.android.assignment.searchlist.SearchListFragment;
 import com.android.assignment.main.MainActivity;
 import com.android.assignment.search.SearchActivity;
 
