@@ -7,8 +7,8 @@
     <string name="api_default_error">Something wrong happened!</string>
     <string name="some_error">Some Error Occurred!</string>
     <string name="connection_error">Internet connection lost!</string>
-    <string name="type">Enter Project Type</string>
-    <string name="language">Enter Project Language</string>
+    <string name="type"> Project Type</string>
+    <string name="language"> Project Language</string>
     <string name="type_validation">Project Type is Essential</string>
     <string name="language_validation">Project Language is Essential</string>
 

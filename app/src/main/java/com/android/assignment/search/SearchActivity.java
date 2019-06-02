@@ -65,6 +65,10 @@ public class SearchActivity extends BaseActivity implements SearchView, SearchLi
         Intent intent = getIntent();
         project_type = intent.getStringExtra(Constants.TYPE);
         project_language = intent.getStringExtra(Constants.LANGUAGE);
+
+        edProjectType.setText(project_type);
+        edProjectLanguage.setText(project_language);
+
         setupViewPager();
         setupSearchView();
         searchListAdapter.setOnItemClickListener(this);
