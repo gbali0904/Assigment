@@ -85,6 +85,7 @@ public class SearchActivity extends BaseActivity implements SearchView, SearchLi
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
+        toolbar.setTitle("Search ");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

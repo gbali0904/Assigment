@@ -72,10 +72,17 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     public void openMainActivity() {
+
         Intent intent = new Intent(MainActivity.this, SearchActivity.class);
         intent.putExtra(Constants.TYPE, project_type);
         intent.putExtra(Constants.LANGUAGE, project_language);
         startActivity(intent);
+        clearText();
+    }
+
+    private void clearText() {
+        edProjectType.setText("");
+        edProjectLanguage.setText("");
     }
 
     @Override
