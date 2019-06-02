@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
 
 import com.android.assignment.R;
@@ -15,8 +18,6 @@ import com.android.assignment.base.BaseActivity;
 import com.android.assignment.search.adapter.SectionsPagerAdapter;
 import com.android.assignment.search.persenter.SearchMVPPersenter;
 import com.android.assignment.search.view.SearchView;
-import com.android.assignment.searchdetail.SearchDetailFragment;
-import com.android.assignment.searchlist.SearchListFragment;
 import com.android.assignment.searchlist.adapter.SearchListAdapter;
 import com.android.assignment.searchlist.model.ModelForSearchList;
 import com.android.assignment.utility.Constants;
@@ -35,6 +36,10 @@ public class SearchActivity extends BaseActivity implements SearchView, SearchLi
     EditText edProjectLanguage;
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
+    @BindView(R.id.toolbar_2)
+    Toolbar toolbar;
+    @BindView(R.id.appbar)
+    AppBarLayout appbar;
     private String project_type;
     private String project_language;
     private Handler mHandler = new Handler(Looper.getMainLooper());
@@ -69,10 +74,25 @@ public class SearchActivity extends BaseActivity implements SearchView, SearchLi
         edProjectType.setText(project_type);
         edProjectLanguage.setText(project_language);
 
+        setToolBar();
         setupViewPager();
         setupSearchView();
         searchListAdapter.setOnItemClickListener(this);
         tabLayout.setupWithViewPager(mViewPager);
+    }
+
+    private void setToolBar() {
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
 
