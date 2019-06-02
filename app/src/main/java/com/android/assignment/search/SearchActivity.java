@@ -85,11 +85,13 @@ public class SearchActivity extends BaseActivity implements SearchView, SearchLi
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+
+                        mSectionsPagerAdapter.hideDetails();
                         mSectionsPagerAdapter.showSearchList(edProjectType.getText()
                                 .toString(), edProjectLanguage.getText().toString());
                         hideKeyboard();
                     }
-                }, 5000);
+                }, 1000);
             }
 
             @Override

@@ -2,6 +2,7 @@ package com.android.assignment.searchdetail;
 
 import android.os.Bundle;
 import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ public class SearchDetailFragment extends BaseFragment {
     @BindView(R.id.detailData)
     TextView detailData;
     Unbinder unbinder;
+    private String license_spanned="";
+    private String owner_spanned="";
 
 
     public static SearchDetailFragment newInstance(ModelForSearchList.ItemsBean itemdata) {
@@ -50,11 +53,39 @@ public class SearchDetailFragment extends BaseFragment {
         loadNewData(item_data);
     }
     public void loadNewData(ModelForSearchList.ItemsBean itemdata) {
-        detailData.setText( Html.fromHtml("id:"+itemdata.getId()+
-                "<br> Node Id:"+itemdata.getNode_id()+"</br>"+
-                "<br> name:"+itemdata.getName()+"</br>"+
-                "<br> full_name:"+itemdata.getFull_name()+"</br>"+
-                "<br> private:"+itemdata.isPrivateX()+"</br>"
-        ));
+
+
+        if (null != itemdata.getLicense())
+        {
+            license_spanned = "<h2><br><b>LICENSE: </b></br></h2>" +
+                    "<b> Key: </b>" + itemdata.getLicense().getKey() +
+                    "<br> <b> Name: </b>" + itemdata.getLicense().getName() + "</br>" +
+                    "<br> <b> URL: </b>" + itemdata.getLicense().getUrl() + "</br>" +
+                    "<br> <b> Node ID: </b>" + itemdata.getLicense().getNode_id() + "</br>";
+
+        }
+        if (null != itemdata.getOwner())
+        {
+
+            owner_spanned = "<h2><br> <b>OWNER: </b></br></h2>" +
+                " <b> ID: </b>" + itemdata.getOwner().getId() + "" +
+                "<br> <b> Login: </b>" + itemdata.getOwner().getLogin() + "</br>" +
+                "<br> <b> Type: </b>" + itemdata.getOwner().getType() + "</br>";
+        }
+        detailData.setText(Html.fromHtml(
+                "<h2><br><b>DETAIL: </b>" + itemdata.getName() + "</br></h2>" +
+                        "<b>id:</b>" + itemdata.getId() +
+                        "<br> <b>Node Id:</b>" + itemdata.getNode_id() + "</br>" +
+                        "<br> <b>Name:</b>" + itemdata.getName() + "</br>" +
+                        "<br> <b>Languages:</b>" + itemdata.getLanguage() + "</br>" +
+                        "<br> <b>Full Name:</b>" + itemdata.getFull_name() + "</br>" +
+                        "<br> <b>Private: </b>" + itemdata.isPrivateX() + "</br>" +
+                        "<br> <b>Description: </b>" + itemdata.getDescription() + "</br>" +
+                        "<br> <b>URL: </b>" + itemdata.getUrl() + "</br>" +
+                        "<br> <b>Languages URL: </b>" + itemdata.getLanguages_url() + "</br>" +
+                        "<br> <b>Created At: </b>" + itemdata.getCreated_at() + "</br>" +
+                        "<br> <b>Updated At: </b>" + itemdata.getUpdated_at() + "</br>" +
+                        "<br> <b>Size: </b>" + itemdata.getSize() + "</br>"+license_spanned+owner_spanned));
+
     }
 }

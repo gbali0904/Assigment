@@ -94,6 +94,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             final ModelForSearchList.ItemsBean itemsBean = modelForSearchList.get(position);
             repo_name.setText(itemsBean.getName());
             oldRow=row_index;
+
             lay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -104,7 +105,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                         clickListener_new.onItemClick(itemsBean);
                         click=true;
                     }
-                    else {
+                    else if(click){
                         if(row_index==oldRow )
                         {
                             clickListener_new.onHide();
@@ -115,7 +116,6 @@ public class SearchListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                             click=false;
                         }
                     }
-
                 }
             });
 
